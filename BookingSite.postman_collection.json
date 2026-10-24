@@ -1,0 +1,191 @@
+{
+  "info": {
+    "_postman_id": "64fac6f5-1494-49a2-b865-f093c046d890",
+    "name": "BookingSite",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58919214",
+    "_collection_link": "https://go.postman.co/collection/58919214-64fac6f5-1494-49a2-b865-f093c046d890?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "ExportedCreateToken",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/auth",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "auth"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \\\r\n  https://restful-booker.herokuapp.com/auth \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}'"
+          },
+          "response": []
+        },
+        {
+          "name": "CreateToken",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/auth",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Booking",
+      "item": [
+        {
+          "name": "GetBookingIds",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/booking",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "booking"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetBooking",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\n\r\npm.test(\"Check the user booking name\", function () {\r\n    var jsonData = pm.response.json();\r\n    pm.expect(jsonData.firstname).to.eql(\"Eric\");\r\n    pm.expect(jsonData.lastname).to.eql(\"Jones\");\r\n});\r\n\r\npm.test(\"Check Checkin date\", function () {\r\n    var jsonData = pm.response.json();\r\n    pm.expect(jsonData.bookingdates.checkin).to.eql(\"2017-04-27\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/booking/8",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "booking",
+                "8"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetBookingbyParameters",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\n\r\npm.test(\"Check the user booking name\", function () {\r\n    var jsonData = pm.response.json();\r\n    pm.expect(jsonData.firstname).to.eql(\"Eric\");\r\n    pm.expect(jsonData.lastname).to.eql(\"Jones\");\r\n});\r\n\r\npm.test(\"Check Checkin date\", function () {\r\n    var jsonData = pm.response.json();\r\n    pm.expect(jsonData.bookingdates.checkin).to.eql(\"2017-04-27\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/booking/?firstname=Eric&lastname=Jones",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "booking",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "firstname",
+                  "value": "Eric"
+                },
+                {
+                  "key": "lastname",
+                  "value": "Jones"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Ping",
+      "item": []
+    },
+    {
+      "name": "HealthCheck",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BaseURL}}/ping",
+          "host": [
+            "{{BaseURL}}"
+          ],
+          "path": [
+            "ping"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "BaseURL",
+      "value": ""
+    }
+  ]
+}
